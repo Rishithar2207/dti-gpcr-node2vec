@@ -4,7 +4,7 @@ Node2Vec embeddings over a similarity-augmented bipartite drug–target graph, w
 ensemble classifier for link prediction on the GPCR benchmark dataset.
 
 MSc Data Science individual project, King's College London (7CCSMPRJ), supervised by Dr Sophia Tsoka.
-Full dissertation: [`report/`](report/).
+Full dissertation: [`MSc_Dissertation_Deep_Learning_Methods_for_Drug_Target_Interactions.pdf`](MSc_Dissertation_Deep_Learning_Methods_for_Drug_Target_Interactions.pdf).
 
 ## Problem
 
@@ -27,8 +27,8 @@ Yamanishi et al. GPCR benchmark — three tab-separated matrices:
   (635 drug–target, 605 drug–drug, 555 target–target)
 
 The data files are not committed here. Download them from the
-[Yamanishi benchmark release](https://web.kuicr.kyoto-u.ac.jp/supp/yoshi/drugtarget/) and drop the
-three `.txt` files into `data/`.
+[Yamanishi benchmark release](https://web.kuicr.kyoto-u.ac.jp/supp/yoshi/drugtarget/) and put the
+three `.txt` files in the same directory as the script.
 
 ## Method
 
@@ -63,23 +63,15 @@ PR-AUC is reported alongside ROC-AUC because the class skew makes ROC-AUC optimi
 
 ```bash
 pip install -r requirements.txt
-# place the three GPCR .txt files in data/, then:
-cd data && python ../src/dti_pipeline.py
+# put the three GPCR .txt files in this directory, then:
+python dti_pipeline.py
 ```
 
-The script reads the data files from the working directory and writes `node_embeddings.csv`,
-`optimal_node_embeddings.csv`, `dti_samples.csv` and `dti_graph.gexf` beside them.
+Writes `node_embeddings.csv`, `optimal_node_embeddings.csv`, `dti_samples.csv` and
+`dti_graph.gexf` to the working directory.
 
 Runtime: Node2Vec training measured at ~1,600 nodes/second on 2 CPU cores with 12.67 GB RAM. No
 GPU required.
-
-## Repo layout
-
-```
-src/dti_pipeline.py   end-to-end pipeline: load → graph → embed → sample → train → evaluate → plot
-data/                 GPCR benchmark files (not committed)
-results/              generated embeddings, graphs, figures
-```
 
 ## Known limitations
 
